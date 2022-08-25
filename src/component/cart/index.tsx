@@ -1,41 +1,34 @@
-import {
-  View,
-  TouchableOpacity,
-  Text
-} from 'react-native';
+import { View, TouchableOpacity, Text } from "react-native";
 
-import styles from './style'
+import { useSelector } from "react-redux";
+import { cartStateData } from "./../../store/modules/cart/reducer";
 
-import { 
-  AntDesign 
-} from '@expo/vector-icons';
+import styles from "./style";
+
+import { AntDesign } from "@expo/vector-icons";
+import { useState } from "react";
+import CartModal from "../cartModal";
 
 const Cart = () => {
-  return(
-    <View
-      style={styles.container}
-    >
-      <TouchableOpacity
-        onPress={() => alert('Test')}
-      >
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
+  const toggleModal = () => setShowCartModal((old) => !old);
+  const cart = useSelector(cartStateData);
 
-      <AntDesign
-        name="shoppingcart"
-        size={24}
-        color="black"
-        />
+  return (
+    <View style={styles.container}>
+      {showCartModal && (
+        <CartModal setShowCartModal={toggleModal} showCartModal />
+      )}
+      <TouchableOpacity onPress={toggleModal}>
+        <AntDesign name="shoppingcart" size={24} color="black" />
       </TouchableOpacity>
-      <View
-        style={styles.contentCart}
-      >
-        <Text
-        style={styles.textContentCart}
-        >
-          0
+      <View style={styles.contentCart}>
+        <Text style={styles.textContentCart}>
+          {cart.length > 0 ? cart.length : 0}
         </Text>
       </View>
     </View>
-  )
+  );
 };
 
 export default Cart;

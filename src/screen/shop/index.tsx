@@ -1,12 +1,16 @@
 import { View, Text, Image, Button, ScrollView } from "react-native";
+import { useDispatch } from "react-redux";
 
 import Cart from "../../component/cart";
 
 import styles from "./style";
 
 import { products } from "../../constants";
+import { addNewItem } from "./../../store/modules/cart/reducer";
 
 const Shop = () => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <Cart />
@@ -25,7 +29,7 @@ const Shop = () => {
               </Text>
               <Button
                 title="Adicionar ao carrinho"
-                onPress={() => alert("Adicionado")}
+                onPress={() => dispatch(addNewItem(item))}
               />
             </View>
           </View>
