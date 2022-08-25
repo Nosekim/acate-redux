@@ -26,11 +26,11 @@ export default function CartModal({
       <View style={styles.container}>
         {cart.length > 0 ? (
           <View>
-            {cart.map((item) => {
+            {cart.map((item, index) => {
               return (
                 <View style={styles.item}>
                   <Text>{item.name}</Text>
-                  <TouchableOpacity onPress={() => dispatch(removeItem(item))}>
+                  <TouchableOpacity onPress={() => dispatch(removeItem(index))}>
                     <Text>Remover Item</Text>
                   </TouchableOpacity>
                 </View>
