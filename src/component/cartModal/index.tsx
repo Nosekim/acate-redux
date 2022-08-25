@@ -1,5 +1,6 @@
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import React from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,10 +29,12 @@ export default function CartModal({
           <View>
             {cart.map((item, index) => {
               return (
-                <View style={styles.item}>
-                  <Text>{item.name}</Text>
+                <View key={`cartitem-${index}`} style={styles.item}>
+                  <View style={styles.textContainer}>
+                    <Text>{item.name}</Text>
+                  </View>
                   <TouchableOpacity onPress={() => dispatch(removeItem(index))}>
-                    <Text>Remover Item</Text>
+                    <AntDesign name="delete" size={24} color="black" />
                   </TouchableOpacity>
                 </View>
               );
